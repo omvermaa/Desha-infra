@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'DM Sans', sans-serif;
+  --font-display: 'Playfair Display', serif;
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+}
+
+:root {
+  --font-sans: 'DM Sans', sans-serif;
+  --font-display: 'Playfair Display', serif;
+
+  /* LIGHT MODE (Cream & Charcoal) */
+  --background: 36 20% 95%; /* #f7f5f0 */
+  --foreground: 0 0% 7%; /* #121212 */
+  
+  --card: 36 15% 98%;
+  --card-foreground: 0 0% 7%;
+  
+  --popover: 36 20% 95%;
+  --popover-foreground: 0 0% 7%;
+  
+  --primary: 0 0% 7%;
+  --primary-foreground: 36 20% 95%;
+  
+  --secondary: 36 10% 90%;
+  --secondary-foreground: 0 0% 7%;
+  
+  --muted: 36 10% 90%;
+  --muted-foreground: 0 0% 40%;
+  
+  --accent: 43 74% 49%; /* #D4AF37 Gold */
+  --accent-foreground: 0 0% 100%;
+  
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 0 0% 85%;
+  --input: 0 0% 85%;
+  --ring: 0 0% 7%;
+
+  --radius: 0rem; /* Sharp edges for luxury feel */
+}
+
+.dark {
+  /* DARK MODE (Deep Obsidian & Gold) */
+  --background: 0 0% 4%; /* #0a0a0a */
+  --foreground: 36 20% 95%; /* #f7f5f0 */
+  
+  --card: 0 0% 7%;
+  --card-foreground: 36 20% 95%;
+  
+  --popover: 0 0% 4%;
+  --popover-foreground: 36 20% 95%;
+  
+  --primary: 36 20% 95%;
+  --primary-foreground: 0 0% 4%;
+  
+  --secondary: 0 0% 12%;
+  --secondary-foreground: 36 20% 95%;
+  
+  --muted: 0 0% 12%;
+  --muted-foreground: 0 0% 65%;
+  
+  --accent: 43 74% 49%; /* Gold */
+  --accent-foreground: 0 0% 4%;
+  
+  --border: 0 0% 15%;
+  --input: 0 0% 15%;
+  --ring: 36 20% 95%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  /* body {
+    @apply bg-background text-foreground antialiased selection:bg-accent selection:text-accent-foreground;
+    font-family: var(--font-sans);
+    @media (pointer: fine) {
+    }
+  } */
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-normal tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Noise Texture Overlay */
+  .bg-noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-body {
+    font-family: var(--font-sans);
+  }
+  
+  /* Hide scrollbar for seamless experience */
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+}
+
+/* Premium Link Hover Effect */
+.link-hover {
+  position: relative;
+  display: inline-block;
+}
+
+.link-hover::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: bottom right;
+  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.link-hover:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
