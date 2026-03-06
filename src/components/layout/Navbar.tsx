@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, type MouseEvent } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { toast } from "sonner";
 
 
 export function Navbar() {
@@ -196,7 +197,7 @@ export function Navbar() {
               className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-background border border-border p-8 z-[70] shadow-2xl"
             >
               <div className="flex justify-between items-center mb-8">
-                <h2 className="font-display text-3xl text-foreground">Inquire</h2>
+                <h2 className="font-display text-3xl text-foreground">Enquire</h2>
                 <button 
                   onClick={() => setInquireOpen(false)}
                   className="text-muted-foreground hover:text-foreground transition-colors"
@@ -205,7 +206,7 @@ export function Navbar() {
                 </button>
               </div>
               
-              <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setInquireOpen(false); }}>
+              <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setInquireOpen(false); toast.success("We will contact you soon"); }}>
                 <div className="space-y-2">
                   <label className="text-xs uppercase tracking-widest text-muted-foreground">Name</label>
                   <input type="text" required className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground" placeholder="Your Name" />
@@ -218,7 +219,7 @@ export function Navbar() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs uppercase tracking-widest text-muted-foreground">Phone</label>
-                    <input type="tel" className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground" placeholder="+1 (555) 000-0000" />
+                    <input type="tel" className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground" placeholder="+91 9999999999" />
                   </div>
                 </div>
 
@@ -228,7 +229,7 @@ export function Navbar() {
                 </div>
 
                 <button type="submit" className="w-full bg-foreground text-background py-4 uppercase tracking-widest text-sm font-bold hover:bg-accent hover:text-white transition-colors duration-300">
-                  Send Inquiry
+                  Send Enquiry
                 </button>
               </form>
             </motion.div>

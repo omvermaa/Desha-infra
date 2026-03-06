@@ -454,9 +454,10 @@ import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { SmoothScroll } from "../components/layout/SmoothScroll";
 import { useProject } from "../hooks/use-project";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { ArrowLeft } from "lucide-react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { ArrowLeft, Lock, X } from "lucide-react";
+import { toast } from "sonner";
 import sukoon from "@/assets/sukoon.webp";
 import sukoon2 from "@/assets/sukoon2.webp";
 import sukoon3 from "@/assets/sukoon3.webp";
@@ -469,8 +470,20 @@ import desha3 from "@/assets/desha3.jpg";
 
 export default function ProjectDetail() {
   const { slug } = useParams();
+  const [inquireOpen, setInquireOpen] = useState(false);
   const { data: project, isLoading } = useProject(slug || "");
   const heroRef = useRef(null);
+
+useEffect(() => {
+    if (inquireOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [inquireOpen]);
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -710,9 +723,141 @@ elevated.`,
             </div>
           </div>
         </section>
+
+
+        {/* Blurry Plans & Pricing Section */}
+        <section className="py-20 md:py-32 px-6 md:px-12 bg-muted/20 border-t border-border">
+          <div className="container mx-auto">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.8 }}
+              className="mb-12 md:mb-16 text-center md:text-left"
+            >
+              <h2 className="font-display text-4xl md:text-5xl mb-4 text-foreground">Project Plans</h2>
+              <p className="text-muted-foreground text-sm md:text-base">Unlock detailed master plans and flexible payment schedules.</p>
+            </motion.div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+              {/* Master Plan */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                className="group relative overflow-hidden rounded-sm border border-border aspect-[4/3] md:aspect-video bg-background flex items-center justify-center"
+              >
+                <div className="absolute inset-0 z-0">
+                  <img 
+                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop" 
+                    alt="Master Plan Preview" 
+                    className="w-full h-full object-cover blur-[8px] opacity-40 scale-105 transition-transform duration-1000 group-hover:scale-110"
+                  />
+                </div>
+                <div className="relative z-10 flex flex-col items-center text-center p-6">
+                  <div className="w-14 h-14 rounded-full bg-background/20 border border-border/50 flex items-center justify-center mb-6 backdrop-blur-md shadow-xl">
+                    <Lock className="w-6 h-6 text-foreground" />
+                  </div>
+                  <h3 className="font-display text-2xl md:text-3xl mb-3 text-foreground drop-shadow-md">Master Plan</h3>
+                  <p className="text-sm text-foreground/80 mb-8 max-w-xs drop-shadow-sm">View the complete layout, zoning, and plot dimensions</p>
+                  <button onClick={() => setInquireOpen(true)} className="px-8 py-3 bg-foreground text-background text-xs uppercase tracking-[0.2em] font-bold rounded-sm hover:bg-accent hover:text-foreground transition-colors">
+                    Request Access
+                  </button>
+                </div>
+              </motion.div>
+
+              {/* Payment Plan */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="group relative overflow-hidden rounded-sm border border-border aspect-[4/3] md:aspect-video bg-background flex items-center justify-center"
+              >
+                <div className="absolute inset-0 z-0">
+                  <img 
+                    src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2072&auto=format&fit=crop" 
+                    alt="Payment Plan Preview" 
+                    className="w-full h-full object-cover blur-[8px] opacity-40 scale-105 transition-transform duration-1000 group-hover:scale-110"
+                  />
+                </div>
+                <div className="relative z-10 flex flex-col items-center text-center p-6">
+                  <div className="w-14 h-14 rounded-full bg-background/20 border border-border/50 flex items-center justify-center mb-6 backdrop-blur-md shadow-xl">
+                    <Lock className="w-6 h-6 text-foreground" />
+                  </div>
+                  <h3 className="font-display text-2xl md:text-3xl mb-3 text-foreground drop-shadow-md">Payment Plan</h3>
+                  <p className="text-sm text-foreground/80 mb-8 max-w-xs drop-shadow-sm">Explore flexible payment milestones and pricing structures</p>
+                  <button onClick={() => setInquireOpen(true)} className="px-8 py-3 bg-foreground text-background text-xs uppercase tracking-[0.2em] font-bold rounded-sm hover:bg-accent hover:text-foreground transition-colors">
+                    Request Access
+                  </button>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
       </main>
 
       <Footer />
+
+      {/* Inquiry Modal */}
+      <AnimatePresence>
+        {inquireOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setInquireOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-md z-[60]"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.3 }}
+              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-background border border-border p-8 z-[70] shadow-2xl"
+            >
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="font-display text-3xl text-foreground">Enquire</h2>
+                <button 
+                  onClick={() => setInquireOpen(false)}
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+              
+              <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setInquireOpen(false); toast.success("We will contact you soon"); }}>
+                <div className="space-y-2">
+                  <label className="text-xs uppercase tracking-widest text-muted-foreground">Name</label>
+                  <input type="text" required className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground" placeholder="Your Name" />
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-xs uppercase tracking-widest text-muted-foreground">Email</label>
+                    <input type="email" required className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground" placeholder="john@example.com" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs uppercase tracking-widest text-muted-foreground">Phone</label>
+                    <input type="tel" className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground" placeholder="+91 9999999999" />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs uppercase tracking-widest text-muted-foreground">Message</label>
+                  <textarea rows={4} className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground resize-none" placeholder="Tell us about your interest..." />
+                </div>
+
+                <button type="submit" className="w-full bg-foreground text-background py-4 uppercase tracking-widest text-sm font-bold hover:bg-accent hover:text-white transition-colors duration-300">
+                  Send Enquiry
+                </button>
+              </form>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </SmoothScroll>
   );
 }
