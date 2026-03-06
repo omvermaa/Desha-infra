@@ -67,7 +67,7 @@ export async function registerRoutes(
   app: Express
 ): Promise<Server> {
     
-  app.get(api.projects.list.path, async (req, res) => {
+  app.get(api.projects.list.path, async (_req, res) => {
     const projects = await storage.getProjects();
     res.json(projects);
   });
