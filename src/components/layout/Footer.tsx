@@ -25,9 +25,10 @@ export function Footer() {
           <div>
             <h4 className="sm:mt-16 font-sans font-bold text-xs tracking-widest uppercase mb-8 text-foreground">Contact</h4>
             <ul className="space-y-4 text-muted-foreground">
-              <li><a href="mailto:info@auradevelopment.com" className="hover:text-accent transition-colors link-hover">info@auradevelopment.com</a></li>
-              <li><a href="tel:+12125550199" className="hover:text-accent transition-colors link-hover">+1 (212) 555-0199</a></li>
-              <li className="pt-4">100 Premium Way,<br/>New York, NY 10001</li>
+              <li><a href="mailto:disha.akash999@gmail.com" className="hover:text-accent transition-colors link-hover">disha.akash999@gmail.com</a></li>
+              <li><a href="tel:+919873724344" className="hover:text-accent transition-colors link-hover">+91 9873724344</a></li>
+              <li><a href="tel:+919205731693" className="hover:text-accent transition-colors link-hover">+91 9205731693</a></li>
+              <li className="pt-4">Office number 805, Ufairia Mall<br/>Ek Murti, Noida Extension</li>
             </ul>
           </div>
         </div>
