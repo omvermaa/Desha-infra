@@ -28,7 +28,7 @@ export function Footer() {
               <li><a href="mailto:disha.akash999@gmail.com" className="hover:text-accent transition-colors link-hover">disha.akash999@gmail.com</a></li>
               <li><a href="tel:+919873724344" className="hover:text-accent transition-colors link-hover">+91 9873724344</a></li>
               <li><a href="tel:+919205731693" className="hover:text-accent transition-colors link-hover">+91 9205731693</a></li>
-              <li className="pt-4">Office number 805, Ufairia Mall<br/>Ek Murti, Noida Extension</li>
+              <li className="pt-4">Office number 1112, Ufairia Mall<br/>Ek Murti, Noida Extension</li>
             </ul>
           </div>
         </div>
