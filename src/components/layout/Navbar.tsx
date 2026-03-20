@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, type MouseEvent } from "react";
+import { useState, useEffect, type MouseEvent, type FormEvent } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { toast } from "sonner";
@@ -58,6 +58,31 @@ export function Navbar() {
       window.scrollTo(0, 0);
     }
     setMobileMenuOpen(false);
+  };
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+
+    formData.append("access_key", "285bbd67-f284-4fd4-85b8-6b94bfc9c1d6");
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        setInquireOpen(false);
+        toast.success("We will contact you soon");
+        event.currentTarget.reset();
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -206,26 +231,26 @@ export function Navbar() {
                 </button>
               </div>
               
-              <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setInquireOpen(false); toast.success("We will contact you soon"); }}>
+              <form className="space-y-6" onSubmit={onSubmit}>
                 <div className="space-y-2">
                   <label className="text-xs uppercase tracking-widest text-muted-foreground">Name</label>
-                  <input type="text" required className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground" placeholder="Your Name" />
+                  <input name="name" type="text" required className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground" placeholder="Your Name" />
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-xs uppercase tracking-widest text-muted-foreground">Email</label>
-                    <input type="email" required className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground" placeholder="john@example.com" />
+                    <input name="email" type="email" required className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground" placeholder="john@example.com" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs uppercase tracking-widest text-muted-foreground">Phone</label>
-                    <input type="tel" className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground" placeholder="+91 9999999999" />
+                    <input name="phone" type="tel" className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground" placeholder="+91 9999999999" />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-xs uppercase tracking-widest text-muted-foreground">Message</label>
-                  <textarea rows={4} className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground resize-none" placeholder="Tell us about your interest..." />
+                  <textarea name="message" rows={4} className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground resize-none" placeholder="Tell us about your interest..." />
                 </div>
 
                 <button type="submit" className="w-full bg-foreground text-background py-4 uppercase tracking-widest text-sm font-bold hover:bg-accent hover:text-white transition-colors duration-300">

@@ -14,6 +14,30 @@ function StatementSection() {
   const isInView = useInView(ref, { once: true, margin: "-20%" });
   const [inquireOpen, setInquireOpen] = useState(false);
 
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    formData.append("access_key", "285bbd67-f284-4fd4-85b8-6b94bfc9c1d6");
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        setInquireOpen(false);
+        toast.success("We will contact you soon");
+        event.currentTarget.reset();
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
+
   useEffect(() => {
     if (inquireOpen) {
       document.body.style.overflow = "hidden";
@@ -100,11 +124,7 @@ function StatementSection() {
 
               <form
                 className="space-y-6"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setInquireOpen(false);
-                  toast.success("We will contact you soon");
-                }}
+                onSubmit={onSubmit}
               >
                 <div className="space-y-2">
                   <label className="text-xs uppercase tracking-widest text-muted-foreground">
@@ -112,6 +132,7 @@ function StatementSection() {
                   </label>
                   <input
                     type="text"
+                    name="name"
                     required
                     className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground"
                     placeholder="Your Name"
@@ -125,6 +146,7 @@ function StatementSection() {
                     </label>
                     <input
                       type="email"
+                      name="email"
                       required
                       className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground"
                       placeholder="john@example.com"
@@ -136,6 +158,7 @@ function StatementSection() {
                     </label>
                     <input
                       type="tel"
+                      name="phone"
                       className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground"
                       placeholder="+91 9999999999"
                     />
@@ -148,6 +171,7 @@ function StatementSection() {
                   </label>
                   <textarea
                     rows={4}
+                    name="message"
                     className="w-full bg-secondary/30 border border-border p-3 focus:outline-none focus:border-accent transition-colors text-foreground resize-none"
                     placeholder="Tell us about your interest..."
                   />
