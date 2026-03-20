@@ -120,7 +120,7 @@ export function Navbar() {
                   ? "text-accent"
                   : scrolled
                   ? "text-foreground/80 hover:text-foreground"
-                  : "text-black hover:text-white"
+                  : "text-black hover:text-black/50"
               }`;
 
               if (isHashLink) {
@@ -138,8 +138,8 @@ export function Navbar() {
             })}
             <button 
               onClick={() => setInquireOpen(true)}
-              className={`px-6 py-2 border transition-colors duration-300 text-sm text-black tracking-widest uppercase ${
-                scrolled ? "border-foreground/20 hover:border-foreground" : "border-black hover:border-white"
+              className={`px-6 py-2 border transition-colors duration-300 text-sm text-black hover:text-black/50 tracking-widest uppercase ${
+                scrolled ? "border-foreground/20 hover:border-foreground" : "border-black/50 hover:border-black"
               }`}
             >
               Enquire
