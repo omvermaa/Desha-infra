@@ -90,7 +90,7 @@ export function Navbar() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${
           scrolled
-            ? "bg-background/80 backdrop-blur-md"
+            ? "bg-background/80  backdrop-blur-md"
             : "bg-transparent py-6 text-white"
         }`}
       >
@@ -120,7 +120,7 @@ export function Navbar() {
                   ? "text-accent"
                   : scrolled
                   ? "text-foreground/80 hover:text-foreground"
-                  : "text-white/80 hover:text-white"
+                  : "text-black hover:text-white"
               }`;
 
               if (isHashLink) {
@@ -138,8 +138,8 @@ export function Navbar() {
             })}
             <button 
               onClick={() => setInquireOpen(true)}
-              className={`px-6 py-2 border transition-colors duration-300 text-sm tracking-widest uppercase ${
-                scrolled ? "border-foreground/20 hover:border-foreground" : "border-white/20 hover:border-white"
+              className={`px-6 py-2 border transition-colors duration-300 text-sm text-black tracking-widest uppercase ${
+                scrolled ? "border-foreground/20 hover:border-foreground" : "border-black hover:border-white"
               }`}
             >
               Enquire
