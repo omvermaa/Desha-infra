@@ -115,12 +115,14 @@ export function Navbar() {
           <div className="hidden md:flex gap-10 items-center">
             {navLinks.map((link) => {
               const isHashLink = link.path.startsWith("/#");
-              const className = `text-sm font-medium uppercase tracking-widest link-hover ${
+              const className = `text-sm font-medium uppercase tracking-widest link-hover transition-colors duration-300 ${
                 location === link.path
                   ? "text-accent"
                   : scrolled
-                  ? "text-foreground/80 hover:text-foreground"
-                  : "text-black hover:text-black/50"
+                  ? "text-foreground/80 hover:text-accent"
+                  : location === "/"
+                  ? "text-white/80 hover:text-accent"
+                  : "text-black hover:text-accent"
               }`;
 
               if (isHashLink) {
@@ -138,8 +140,12 @@ export function Navbar() {
             })}
             <button 
               onClick={() => setInquireOpen(true)}
-              className={`px-6 py-2 border transition-colors duration-300 text-sm text-black hover:text-black/50 tracking-widest uppercase ${
-                scrolled ? "border-foreground/20 hover:border-foreground" : "border-black/50 hover:border-black"
+              className={`px-6 py-2 border transition-colors duration-300 text-sm hover:text-accent tracking-widest uppercase ${
+                scrolled 
+                  ? "text-black border-foreground/20 hover:border-accent" 
+                  : location === "/"
+                  ? "text-white/80 border-white/80 hover:border-accent"
+                  : "text-black border-black/50 hover:border-accent"
               }`}
             >
               Enquire
@@ -148,7 +154,13 @@ export function Navbar() {
 
           {/* Mobile Menu Toggle */}
           <button
-            className={`md:hidden relative z-50 ${scrolled ? "text-foreground" : "text-white"}`}
+            className={`md:hidden relative z-50 ${
+              scrolled 
+                ? "text-foreground" 
+                : location === "/"
+                ? "text-white"
+                : "text-black"
+            }`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
