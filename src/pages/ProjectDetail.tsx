@@ -153,31 +153,31 @@ export default function ProjectDetail() {
         desha7, // Suburban neighborhood/roads
       ],
     },
-    "sukoon-villas": {
-      title: "Sukoon Villas",
-      location: "Sadulapur/Vaidpura, Greater Noida West",
-      completionDate: "2026",
-      description:
-        "A breathtaking marvel of modern engineering, redefining the boundaries of vertical living with unparalleled elegance.",
-      content: `Sukoon is an exclusive luxury villa enclave located in
-the peaceful surroundings of Sadulapur, Greater Noida
-West, where modern living meets true sukoon.
+//     "sukoon-villas": {
+//       title: "Sukoon Villas",
+//       location: "Sadulapur/Vaidpura, Greater Noida West",
+//       completionDate: "2026",
+//       description:
+//         "A breathtaking marvel of modern engineering, redefining the boundaries of vertical living with unparalleled elegance.",
+//       content: `Sukoon is an exclusive luxury villa enclave located in
+// the peaceful surroundings of Sadulapur, Greater Noida
+// West, where modern living meets true sukoon.
 
-Thoughtfully designed villas offer elegant architecture,
-abundant natural light, and serene open spaces, while
-enjoying excellent connectivity to reputed schools,
-healthcare, shopping, and daily conveniences—creating
-a refined lifestyle that is calm, comfortable, and truly
-elevated.`,
-      heroImage: sukoon,
-      stats: [
-        { label: "Height", value: "450m" },
-        { label: "Levels", value: "112" },
-        { label: "Residences", value: "340" },
-        { label: "Architect", value: "Foster & Partners" },
-      ],
-      gallery: [sukoon, sukoonVid, sukoon2, sukoon3],
-    },
+// Thoughtfully designed villas offer elegant architecture,
+// abundant natural light, and serene open spaces, while
+// enjoying excellent connectivity to reputed schools,
+// healthcare, shopping, and daily conveniences—creating
+// a refined lifestyle that is calm, comfortable, and truly
+// elevated.`,
+//       heroImage: sukoon,
+//       stats: [
+//         { label: "Height", value: "450m" },
+//         { label: "Levels", value: "112" },
+//         { label: "Residences", value: "340" },
+//         { label: "Architect", value: "Foster & Partners" },
+//       ],
+//       gallery: [sukoon, sukoonVid, sukoon2, sukoon3],
+//     },
     "nilgiri-residency": {
       title: "Nilgiri Residency",
       location: "Bhanuta Sector-20, Noida Extension",
