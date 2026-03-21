@@ -29,6 +29,7 @@ import nilgiri2 from "@/assets/nilgiri2.webp";
 import nilgiri3 from "@/assets/nilgiri3.webp";
 import nilgiriVid from "@/assets/nilgiri.mp4";
 import khaatu from "@/assets/khaatu.webp";
+import SukoonVillas from "./SukoonVillas";
 
 
 
@@ -238,6 +239,10 @@ elevated.`,
     stats: [],
     gallery: [],
   };
+
+  if (slug === "sukoon-villas") {
+    return <SukoonVillas />;
+  }
 
   const displayData: Project = project || mockProjects[slug || ""] || defaultMock;
 
